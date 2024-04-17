@@ -62,6 +62,8 @@ driver.quit()
 """
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import csv
@@ -71,7 +73,10 @@ import base64
 import requests
 
 # 初始化 Selenium webdriver
-driver = webdriver.Chrome('./chromedriver')
+options = Options()
+service = Service(r"C:\Users\zxcvb\Desktop\git-repos\python-sql-selenium\chromedriver.exe")
+driver = webdriver.Chrome(service=service, options=options)
+#driver = webdriver.Chrome(executable_path='./chromedriver', options=options)
 driver.get('https://www.pinterest.com/oxxostudio/outdoor/')
 imgCount = driver.find_element(By.CSS_SELECTOR, 'div[data-test-id="pin-count"]')
 count = int(imgCount.text.split(' ')[0])
